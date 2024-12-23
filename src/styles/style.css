@@ -1,0 +1,120 @@
+
+
+.fixed-size-home-post-thumbnail {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+
+.post-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+/* css for the single post page*/
+.post-page-container {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.post-page-left-column {
+    position: relative;
+}
+
+.post-page-content {
+    margin-bottom: 2rem;
+}
+
+.post-page-image-carousel {
+    max-height: 400px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+}
+
+.post-page-carousel-image {
+    object-fit: cover;
+    height: 400px;
+    border-radius: 10px;
+}
+
+.post-page-title {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    max-width: 100%;
+}
+
+.post-page-content-text {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+.post-page-timestamp {
+    font-size: 0.8em;
+    margin-top: 10px;
+}
+
+.post-page-right-column {
+    position: relative;
+    height: calc(100vh - 2rem);
+    display: flex;
+    flex-direction: column;
+}
+
+.post-page-comments-container {
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;
+    padding-right: 15px;
+    /*margin-bottom: 1rem;*/
+}
+.post-page-add-comment{
+    padding-right: 15px;
+
+}
+
+.post-page-comment-timestamp {
+    font-size: 0.5em;
+    color: #777;
+    margin-top: 3px;
+}
+
+.post-page-card {
+    border-radius: 8px;
+
+}
+
+.post-page-card-body {
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .post-page-container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .post-page-right-column {
+        height: auto;
+        margin-top: 2rem;
+    }
+
+    .post-page-comments-container {
+        max-height: 50vh;
+    }
+}
