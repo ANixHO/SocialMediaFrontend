@@ -5,6 +5,7 @@ import axios from 'axios';
 import "../styles/style.css"
 import {useNavigate} from "react-router-dom";
 import {Card, Col, Container, Row} from "react-bootstrap";
+import UserInfo from "../components/UserInfo";
 
 // todo 23DEC add the user info box to each post
 function Home() {
@@ -82,12 +83,15 @@ function Home() {
                         src={post.imageUrl || 'https://via.placeholder.com/300x200'}
                         alt={post.title}
                     />
-                    <Card.Body>
-                        <Card.Title>{post.title}</Card.Title>
-                        <Card.Text>
-                            {post.contentText.substring(0, 100)}
-                            {post.contentText.length > 100 ? '...' : ''}
-                        </Card.Text>
+                    <Card.Body className="px-3 py-2">
+                        <Row >
+                            <UserInfo userId={post.userId} />
+                        </Row>
+                        <Row>
+                            <Col md={12} className="d-flex align-items-center">
+                                <Card.Title className="my-auto">{post.title}</Card.Title>
+                            </Col>
+                        </Row>
                     </Card.Body>
                 </Card>
             </Col>

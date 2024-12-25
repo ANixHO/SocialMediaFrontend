@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
-import {Container, Row, Col, Carousel, Card, Form, Button} from 'react-bootstrap';
+import {Button, Card, Carousel, Col, Container, Form, Row} from 'react-bootstrap';
 import InfiniteScroll from "../components/InfiniteScroll";
 import axios from 'axios';
-import {base64ToBlob, userInputEncoder} from "../components/Utils";
+import {base64ToBlob} from "../components/Utils";
 import '../styles/style.css';
+import UserInfo from "../components/UserInfo";
 
 // todo 23DEC add user info box for each comment
 // todo 23DEC add user info box for post owner
@@ -13,7 +14,8 @@ function Post() {
     const [comment, setComment] = useState('');
     const [images, setImages] = useState([]);
     const [comments, setComments] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [commentsIsloading, setCommentsIsloading] = useState(false);
+    const [postIsLoading, setPostIsLoading] = useState(true);
     const [commentMessage, setCommentMessage] = useState('');
     const [hasMore, setHasMore] = useState(true);
     const [disableInfinitScroll, setDisableInfinitScroll] = useState(false);
@@ -42,6 +44,7 @@ function Post() {
             );
 
             setPost(postResponse.data);
+            setPostIsLoading(false);
 
         } catch (error) {
             if (error.response.status === 401) {
@@ -85,7 +88,7 @@ function Post() {
     };
 
     const getComments = async (page) => {
-        setLoading(true);
+        setCommentsIsloading(true);
         try {
             const response = await axios.get(`http://localhost:8080/api/comments/${id}/${page}`,
                 {
@@ -103,7 +106,7 @@ function Post() {
                 navigate('/Login');
             }
         } finally {
-            setLoading(false);
+            setCommentsIsloading(false);
         }
     };
 
@@ -159,7 +162,7 @@ function Post() {
     };
 
     const showComments = () => {
-        return loading ? (
+        return commentsIsloading ? (
             <p>Loading comments...</p>
         ) : (
             comments.map((comment, index) => (
@@ -188,8 +191,6 @@ function Post() {
     }
 
 
-
-
     if (!post) return <div>Loading...</div>;
 
     return (
@@ -208,8 +209,15 @@ function Post() {
                                 </Carousel.Item>
                             ))}
                         </Carousel>
-                        <h1 className="post-page-title">{post.title}</h1>
-
+                        <Row>
+                            <Col md={9}>
+                                <h1 className="post-page-title">{post.title}</h1>
+                            </Col>
+                            <Col md={3} className="align-content-center p-1">
+                                { !postIsLoading && <UserInfo userId={post.userId}  />}
+                            </Col>
+                        </Row>
+                        <Row>
                         <p className="text-muted post-page-timestamp text-end">
                             Updated at {new Date(post.dateTime).toLocaleString()}
                         </p>
@@ -219,6 +227,7 @@ function Post() {
                                 Edit Post
                             </Button>
                         )}
+                        </Row>
 
                     </div>
                 </Col>

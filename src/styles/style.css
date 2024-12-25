@@ -23,6 +23,12 @@
     -webkit-box-orient: vertical;
 }
 
+.fit-image{
+    max-height: 20px;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+}
+
 /* css for the single post page*/
 .post-page-container {
     padding-left: 5%;

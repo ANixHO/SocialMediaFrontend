@@ -1,9 +1,10 @@
 import {Container, Row, Col, Form, FormGroup, FormLabel, FormControl, Button, Alert} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import axios from 'axios';
 import {isUsernameValid, saveUserInfoToLocalStorage} from "../components/Utils";
 import "../styles/style.css"
+import {AuthContext} from "../components/AuthContext";
 
 
 function Login() {
@@ -11,6 +12,7 @@ function Login() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const {setIsLoggedIn} = useContext(AuthContext);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -38,6 +40,7 @@ function Login() {
                 });
 
             saveUserInfoToLocalStorage(loginResponse.data);
+            setIsLoggedIn(true);
             navigate('/');
         } catch (error) {
             setError('Login failed. Please try again.')
@@ -49,8 +52,6 @@ function Login() {
     }
 
     return (
-
-
         <Container>
             <Row className="justify-content-md-center mt-5">
                 <Col xs={12} md={6}>

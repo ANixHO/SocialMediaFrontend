@@ -9,6 +9,7 @@ import Login from "./pages/Login"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/style.css';
 import SignUp from "./pages/SignUp";
+import {Logout} from "./pages/Logout";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
                     <Route path="/edit-post/:id" element={<EditPost/>}/>
                     <Route path="/login" element={<Login/>} />
                     <Route path="/signup" element={<SignUp/>} />
+                    <Route path="/logout" element={<Logout/>} />
                 </Routes>
             </div>
         </Router>
