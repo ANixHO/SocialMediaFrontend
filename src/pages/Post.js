@@ -223,7 +223,7 @@ function Post() {
                         </p>
                         <p className="post-page-content-text">{post.contentText}</p>
                         {post.userId === localStorage.getItem('id') && (
-                            <Button variant="outline-danger" onClick={() => navigate(`/edit-post/${id}`)}>
+                            <Button variant="outline-danger col-3" onClick={() => navigate(`/edit-post/${id}`)}>
                                 Edit Post
                             </Button>
                         )}

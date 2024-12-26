@@ -1,9 +1,10 @@
 import "../styles/style.css"
-import {useState} from "react";
-import {isUsernameValid, isPasswordSame, saveUserInfoToLocalStorage} from "../components/Utils";
+import {useContext, useState} from "react";
+import {isUsernameAndPasswordValid, isPasswordSame, saveUserInfoToLocalStorage} from "../components/Utils";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import {Alert, Button, Col, Container, Form, FormControl, FormGroup, FormLabel, Row} from "react-bootstrap";
+import {AuthContext} from "../components/AuthContext";
 
 
 function SignUp() {
@@ -12,12 +13,13 @@ function SignUp() {
     const [password_2, setPassword_2] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const {setIsLoggedIn} = useContext(AuthContext);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         setError(null)
 
-        let validation = isUsernameValid(username, password_2);
+        let validation = isUsernameAndPasswordValid(username, password_2);
         let samePassword = isPasswordSame(password_1, password_2);
 
         if (!validation[0]) {
@@ -56,6 +58,7 @@ function SignUp() {
                     });
 
                 saveUserInfoToLocalStorage(loginResponse.data);
+                setIsLoggedIn(true);
                 navigate('/')
             } catch(error){
                 setError('Login failed. Please try again.');

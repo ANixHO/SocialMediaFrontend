@@ -16,18 +16,37 @@ export async function compressImage(file) {
     }
 }
 
-export function isUsernameValid(username, password) {
-    let f = Boolean(false);
-    let t = Boolean(true);
+export function isUsernameAndPasswordValid(username, password) {
 
     if (!username || !password) {
-        return [f, 'Please enter both username and password'];
+        return [false, 'Please enter both username and password'];
     } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-        return [f, 'Username can only contain letters, numbers, and underscores'];
+        return [false, 'Username can only contain letters, numbers, and underscores'];
     } else if (!/^[a-zA-Z0-9!#.&*_+-]+$/.test(password)) {
-        return [f, 'Password can only contain letters, numbers, and special characters !@#$%^&*()_+=-'];
+        return [false, 'Password can only contain letters, numbers, and special characters !@#$%^&*()_+=-'];
     } else {
-        return [t, 'valid']
+        return [true, 'valid']
+    }
+}
+export function isUsernameValid(username) {
+
+    if (!username  ) {
+        return [false, 'Please enter both username and password'];
+    } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+        return [false, 'Username can only contain letters, numbers, and underscores'];
+    }  else {
+        return [true, 'valid']
+    }
+}
+
+export function isPasswordValid( password) {
+
+    if (!password) {
+        return [false, 'Please enter both username and password'];
+    }  else if (!/^[a-zA-Z0-9!#.&*_+-]+$/.test(password)) {
+        return [false, 'Password can only contain letters, numbers, and special characters !@#$%^&*()_+=-'];
+    } else {
+        return [true, 'valid']
     }
 }
 

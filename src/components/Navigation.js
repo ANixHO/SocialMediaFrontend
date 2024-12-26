@@ -1,6 +1,6 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Container, Nav, Navbar} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import {Link, useNavigation} from 'react-router-dom';
 import '../styles/style.css';
 import {validateJwtToken} from "./Utils";
 import UserInfo from "./UserInfo";
@@ -39,7 +39,9 @@ function Navigation() {
                             <Nav.Link as={Link} to="/logout" className="my-auto">Logout</Nav.Link>
                         }
                         {isLoggedIn ? (
-                            <UserInfo userId={localStorage.getItem('id')} />
+                            <Nav.Link as={Link} to={"/myaccount"}>
+                                <UserInfo userId={localStorage.getItem('id')}/>
+                            </Nav.Link>
                         ) : (
                             <Nav.Link as={Link} to="/login">Login</Nav.Link>
                         )

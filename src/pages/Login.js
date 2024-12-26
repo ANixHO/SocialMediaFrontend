@@ -2,7 +2,7 @@ import {Container, Row, Col, Form, FormGroup, FormLabel, FormControl, Button, Al
 import {useNavigate} from "react-router-dom";
 import {useContext, useState} from "react";
 import axios from 'axios';
-import {isUsernameValid, saveUserInfoToLocalStorage} from "../components/Utils";
+import {isUsernameAndPasswordValid, saveUserInfoToLocalStorage} from "../components/Utils";
 import "../styles/style.css"
 import {AuthContext} from "../components/AuthContext";
 
@@ -26,7 +26,7 @@ function Login() {
         //     return;
         // }
 
-        let validation = isUsernameValid(username, password);
+        let validation = isUsernameAndPasswordValid(username, password);
         if (!validation[0]){
             setError(validation[1]);
             return;

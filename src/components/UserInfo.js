@@ -26,14 +26,12 @@ function UserInfo(userId) {
         } catch (error) {
             console.log('Error when get user info: ' + error);
         }
-
-
     }
 
     return (
         <Container className="my-auto">
             <Row className="align-items-center" >
-                <Col xs="auto" className="">
+                <Col xs="auto" >
                     <Image
                         className="rounded-circle fit-image "
                         src={avatarImage || anonymous}
